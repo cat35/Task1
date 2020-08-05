@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Salary implements ReadFile {
+public class Salary{
 
     private double salaryEmployee;
 
@@ -21,17 +21,4 @@ public class Salary implements ReadFile {
         this.salaryEmployee = salaryEmployee;
     }
 
-    ArrayList<Double> salaries = new ArrayList<>();
-    @Override
-    public void readFromFile() {
-        try(Scanner sc = new Scanner(new File("task1.txt"))){
-
-            while(sc.hasNextDouble()){
-                salaries.add(sc.nextDouble());
-            }
-        }
-        catch (IOException ex){
-            ex.printStackTrace();
-        }
-    }
 }
