@@ -1,4 +1,4 @@
-package com.innotechnum.task1;
+package com.innotechnum.task1.pojo;
 
 import java.util.ArrayList;
 

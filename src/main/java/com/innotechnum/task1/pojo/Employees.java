@@ -1,4 +1,4 @@
-package com.innotechnum.task1;
+package com.innotechnum.task1.pojo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
