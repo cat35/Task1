@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class Employees  {
+public class Employees {
 
     private String name;
 
-private BigDecimal salary;
+    private BigDecimal salary;
 
     public Employees(String name, BigDecimal salary) {
         this.name = name;
@@ -31,11 +31,6 @@ private BigDecimal salary;
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Employees(String name) {
-        this.name = name;
-
     }
 
 }
