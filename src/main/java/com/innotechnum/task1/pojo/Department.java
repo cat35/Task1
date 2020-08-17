@@ -1,7 +1,7 @@
 package com.innotechnum.task1.pojo;
 
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Department {
@@ -30,6 +30,10 @@ public class Department {
 
     public void setNameDep(String nameDep) {
         this.nameDep = nameDep;
+    }
+
+    public void addEmployee(Employees e){
+        this.listOfEmployees.add(e);
     }
 
 
