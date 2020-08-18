@@ -9,28 +9,26 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class EmployeeService {
 
 
-   public static Map<String, Department> map = new HashMap<>();
+    public static Map<String, Department> map = new HashMap<>();
 
     public void readFromFile(String name) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(name))) {
             String s;
             while (bufferedReader.ready()) {
                 s = bufferedReader.readLine();
-                if(checkString(s)) {
+                if (checkString(s)) {
                     String[] arr = s.trim().split(";", 3);
-                    if(!map.containsKey(arr[1])){
-                        map.put(arr[1], new Department(arr[1], new ArrayList<Employees>()));
+                    if (!map.containsKey(arr[1])) {
+                        map.put(arr[1], new Department(arr[1], new ArrayList<>()));
                     }
                     map.get(arr[1]).addEmployee(new Employees(arr[0], new BigDecimal(arr[2])));
 
-                }
-                else break;
+                } else break;
 
 
             }
@@ -40,16 +38,9 @@ public class EmployeeService {
         }
     }
 
-    public void lookInformation(){
-        for (Map.Entry<String, Department> pair:
-             map.entrySet()) {
-            System.out.println(pair.getKey() + " " + pair.getValue());
-        }
-    }
-
     public boolean checkString(String str) {
-        String[] arr = str.trim().split(";",3);
-        if(arr.length >= 3) {
+        String[] arr = str.trim().split(";", 3);
+        if (arr.length >= 3) {
             if (arr[0].equals("")) {
                 System.out.println("отсутствует или неверно указано ФИО сотрудника");
                 return false;
@@ -60,7 +51,7 @@ public class EmployeeService {
             }
             if (arr[2].equals("") || !isDigit(arr[2]) || new BigDecimal(arr[2]).compareTo(BigDecimal.valueOf(0)) < 0) {
                 System.out.println("неверный формат зарплаты");
-         return false;
+                return false;
             }
         }
         return true;
@@ -69,11 +60,12 @@ public class EmployeeService {
     }
 
     public boolean isDigit(String s) {
-        try {
-            Double.parseDouble(s);
-            return true;
-        } catch (NumberFormatException e) {
+        if(s == null || s.isEmpty())
             return false;
+        for(int i = 0; i < s.length(); i++) {
+            if (!Character.isDigit(s.charAt(i)))
+                return false;
         }
+        return true;
     }
 }
