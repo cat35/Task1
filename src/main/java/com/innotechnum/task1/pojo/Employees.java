@@ -33,4 +33,8 @@ public class Employees {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "ФИО " + name + " Зарплата " + salary;
+    }
 }

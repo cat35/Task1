@@ -1,14 +1,13 @@
 package com.innotechnum.task1.pojo;
 
 
-
 import java.util.List;
 
 public class Department {
 
-    private String nameDep;
+    private final String nameDep;
 
-    private List<Employees> listOfEmployees;
+    private final List<Employees> listOfEmployees;
 
     public Department(String nameDep, List<Employees> listOfEmployees) {
         this.nameDep = nameDep;
@@ -19,22 +18,24 @@ public class Department {
         return listOfEmployees;
     }
 
-    public void setListOfEmployees(List<Employees> listOfEmployees) {
-        this.listOfEmployees = listOfEmployees;
-    }
-
 
     public String getNameDep() {
         return nameDep;
     }
 
-    public void setNameDep(String nameDep) {
-        this.nameDep = nameDep;
-    }
 
-    public void addEmployee(Employees e){
+    public void addEmployee(Employees e) {
         this.listOfEmployees.add(e);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Employees e : listOfEmployees) {
+            stringBuilder.append(e.toString()).append("\r\n");
+
+        }
+        return stringBuilder.toString();
+    }
 
 }
