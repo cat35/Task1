@@ -16,18 +16,22 @@ public class EmployeeService {
         Map<String, Department> map = new HashMap<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(name))) {
             String s;
+            int count = 0;
             while (bufferedReader.ready()) {
                 s = bufferedReader.readLine();
+                count++;
                 String[] arr = s.trim().split(";", 3);
 
-                if (checkString(s)) {
+                if (checkString(s,count)) {
 
                     if (!map.containsKey(arr[1])) {
                         map.put(arr[1], new Department(arr[1], new ArrayList<>()));
                     }
-                    map.get(arr[1]).addEmployee(new Employees(arr[0], new BigDecimal(arr[2])));
+
+                    map.get(arr[1]).addEmployee(new Employees(arr[0], new BigDecimal(arr[2].trim())));
 
                 } else continue;
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,23 +41,31 @@ public class EmployeeService {
         return new ArrayList<>(map.values());
     }
 
-    public boolean checkString(String str) {
+    public boolean checkString(String str, int m) {
+
+
         String[] arr = str.trim().split(";", 3);
-        if (arr.length != 3) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
+
+
+
+            if (arr.length != 3) {
+                System.out.printf("Строка под номером %d является пустой \n", m);
+                return false;
+            }
+
             if (arr[0].trim().equals("")) {
-                System.out.println("отсутствует или неверно указано ФИО сотрудника");
+                System.out.printf("отсутствует или неверно указано ФИО сотрудника в строке %d \n", m);
                 return false;
             }
             if (arr[1].trim().equals("")) {
-                System.out.println("отсутствует или неверно указано название отдела");
+                System.out.printf("отсутствует или неверно указано название отдела в строке %d \n", m);
                 return false;
             }
-            if (arr[2].trim().equals("") || !isDigit(arr[2]) || new BigDecimal(arr[2]).compareTo(BigDecimal.ZERO) < 0) {
-                System.out.println("неверный формат зарплаты");
+            if (arr[2].trim().equals("") || !isDigit(arr[2].trim()) || new BigDecimal(arr[2].trim()).compareTo(BigDecimal.ZERO) < 0) {
+                System.out.printf("неверный формат зарплаты в строке %d \n", m);
                 return false;
             }
+
 
         return true;
     }
